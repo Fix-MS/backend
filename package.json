@@ -1,27 +1,26 @@
 {
-  "name": "ms-fix-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node .",
-    "prestart": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Fix-MS/backend.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Fix-MS/backend/issues"
-  },
-  "homepage": "https://github.com/Fix-MS/backend#readme",
-  "dependencies": {
-    "@types/express": "^4.17.14",
-    "express": "^4.18.1",
-    "typescript": "^4.8.3"
+    "name": "fix-ms-backend",
+    "version": "0.1.0",
+    "author": "Münsterhack 2022 Group 'Mängelmeldung'",
+    "contributors": [
+      {
+        "name": "Christoph Friedrich"
+      }
+    ],
+    "description": "Backend of Fix-MS accepting flaw reports and forwarding them to the city administration",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Fix-MS/backend/issues"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Fix-MS/backend.git"
+    },
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "restify": "^8.6.1"
+    }
   }
-}
+  
