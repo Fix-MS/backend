@@ -3,7 +3,7 @@ const PACKAGEJSON = require('./../package.json');
 const restify = require('restify');
 var server;
 
-var reports;  // the "database" (for now)
+var reports = [];  // the "database" (for now)
 
 
 // -------------------------------------------------------------------------------------
@@ -41,17 +41,20 @@ server.get('/api', function(req, res, next) {
 
 // List reports
 server.get('/api/reports', function(req, res, next) {
-    enableCORS(req, res);
     res.send(reports);
     next();
 });
 
 // Add new report
 server.post('/api/reports', function(req, res, next) {
-    enableCORS(req, res);
+    var r = req.body;
     if(req.getContentType() != 'application/json') {
         res.statusCode = 415;
         res.send({message: "Only JSON allowed"});
+        next();
+    } else if(!(r.type && r.location && r.firstname && r.lastname && (r.email || r.phone))) {
+        res.statusCode = 400;
+        res.send({message: "JSON does not meet expected format"});
         next();
     } else {
         reports.push(req.body);
@@ -63,7 +66,6 @@ server.post('/api/reports', function(req, res, next) {
 
 // Retrieve individual report
 server.get('/api/reports/:id', function(req, res, next) {
-    enableCORS(req, res);
     if(!Number.isInteger(id)) {
         res.statusCode = 415;
         res.send({message: "Parameter ID must be an integer"});
