@@ -12,7 +12,7 @@ var reports;  // the "database" (for now)
 
 console.log('Starting the server...');
 server = restify.createServer();
-server.listen(9000, function() {
+server.listen(9025, function() {
     console.log('Server started at %s.', server.url);
 });
 

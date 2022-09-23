@@ -21,6 +21,7 @@
         buildInputs = [
             nodejs-14_x
             node2nix
+            python310Full
             (callPackage ./default.nix {}).shell.nodeDependencies
         ];
         shellHook = ''
