@@ -59,24 +59,25 @@ server.post('/api/reports', function(req, res, next) {
     } else {
         reports.push(req.body);
         res.statusCode = 200;
-        res.send({id: reports.length-1})
+        res.send({id: reports.length})
         next();
     }
 });
 
 // Retrieve individual report
 server.get('/api/reports/:id', function(req, res, next) {
-    if(!Number.isInteger(id)) {
-        res.statusCode = 415;
+    var id = parseInt(req.params.id);
+    if(isNaN(id)) {
+        res.statusCode = 400;
         res.send({message: "Parameter ID must be an integer"});
         next();
-    } else if(id < 0 || id >= reports.length) {
+    } else if(id <= 0 || id > reports.length) {
         res.statusCode = 404;
         res.send({message: "ID not found"});
         next();
     } else {
         res.statusCode = 200;
-        res.send(reports[id]);
+        res.send(reports[id-1]);
         next();
     }
 });
