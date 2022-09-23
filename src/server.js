@@ -47,9 +47,14 @@ server.get('/api/reports', function(req, res, next) {
 
 // Add new report
 server.post('/api/reports', function(req, res, next) {
+    var r = req.body;
     if(req.getContentType() != 'application/json') {
         res.statusCode = 415;
         res.send({message: "Only JSON allowed"});
+        next();
+    } else if(!(r.type && r.location && r.firstname && r.lastname && (r.email || r.phone))) {
+        res.statusCode = 400;
+        res.send({message: "JSON does not meet expected format"});
         next();
     } else {
         reports.push(req.body);
