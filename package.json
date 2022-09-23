@@ -1,0 +1,19 @@
+{
+    "name": "fix-ms-backend",
+    "version": "0.1.0",
+    "author": "Münsterhack 2022 Group 'Mängelmeldung'",
+    "contributors": [
+      {
+        "name": "Christoph Friedrich"
+      }
+    ],
+    "description": "Backend of Fix-MS accepting flaw reports and forwarding them to the city administration",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Fix-MS/backend/issues"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Fix-MS/backend.git"
+    }
+}
