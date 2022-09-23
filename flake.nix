@@ -17,7 +17,6 @@
         buildPhase = ''
           ln -s ${(pkgs.callPackage ./default.nix {}).shell.nodeDependencies}/lib/node_modules ./node_modules
           export PATH="${(pkgs.callPackage ./default.nix {}).shell.nodeDependencies}/bin:$PATH"
-          npm run build
         '';
         buildInputs = [
             nodejs-14_x
