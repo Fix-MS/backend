@@ -30,7 +30,7 @@
         installPhase = ''
           mkdir -p $out
           mkdir $out/bin
-          echo "cd ..; npm run start" > $out/bin/start
+          echo "npm run start" > $out/bin/start
           chmod +x $out/bin/start
           cp -r node_modules $out/node_modules
           cp -r src $out/src
