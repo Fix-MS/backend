@@ -28,7 +28,14 @@
           ln -s ${(pkgs.callPackage ./default.nix {}).shell.nodeDependencies}/lib/node_modules ./node_modules
           export PATH="${(pkgs.callPackage ./default.nix {}).shell.nodeDependencies}/bin:$PATH"
         '';
-        installPhase = "mkdir -p $out; cp -r node_modules $out/node_modules; cp -r dist $out";
+        installPhase = ''
+          mkdir -p $out
+          mkdir $out/bin
+          echo "cd ..; npm run start" > $out/bin/start
+          chmod +x $out/bin/start
+          cp -r node_modules $out/node_modules
+          cp -r dist $out/dist
+          '';
       };
     });
 }
