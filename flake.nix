@@ -33,7 +33,7 @@
           echo "cd ..; npm run start" > $out/bin/start
           chmod +x $out/bin/start
           cp -r node_modules $out/node_modules
-          cp -r dist $out/dist
+          cp -r src $out/src
           '';
       };
     });
