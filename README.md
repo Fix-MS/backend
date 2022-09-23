@@ -11,9 +11,11 @@ In- and outputs are always JSON. Status codes are 200 for OK, 400 for invalid JS
 
 `GET /api/reports` -- list all submitted reports
 
-`POST /api/reports` -- add new report. Required fields: `type` (integer, see list below), `location` (either string with street and house number, or object with keys `lat` and `lon` indicating coordinates in WSG84/EPSG:4326), `firstname`, `lastname`, and one of `email` and/or `phone` (all strings). Optional: `remark` (string up to 2000 characters). Not yet supported: `file`. Returns JSON with field `id` indicating the identifier of the newly added resource (integer).
+`POST /api/reports` -- add new report. Required fields: `type` (integer, see list below), `location` (either string with street and house number, or object with keys `lat` and `lon` indicating coordinates in WSG84/EPSG:4326), `firstname`, `lastname`, and one of `email` and/or `phone` (all strings). Optional: `remark` (string up to 2000 characters), `final` (boolean indicating whether the report can be submitted to the city administration server straight away, or is preliminary and still needs confirmation; defaults to false). Not yet supported: `file`. Returns JSON with field `id` indicating the identifier of the newly added resource (integer).
 
 `GET /api/reports/<id>` -- retrieve details of the specified report.
+
+`PUT /api/reports/<id>` -- change the specified report, any field you like, but especially to change `final` from `false` to `true` to trigger report submission. The payload must adhere to the same requirements as during creation of the resource via POST (see above).
 
 
 ## Flaw type list

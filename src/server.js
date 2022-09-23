@@ -45,18 +45,43 @@ server.get('/api/reports', function(req, res, next) {
     next();
 });
 
-// Add new report
-server.post('/api/reports', function(req, res, next) {
+function ensureValidId(req, res, next) {
+    var id = parseInt(req.params.id);
+    if(isNaN(id)) {
+        res.statusCode = 400;
+        res.send({message: "Parameter ID must be an integer"});
+        next();
+        return false;
+    } else if(id <= 0 || id > reports.length) {
+        res.statusCode = 404;
+        res.send({message: "ID not found"});
+        next();
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function ensureValidReport(req, res, next) {
     var r = req.body;
     if(req.getContentType() != 'application/json') {
         res.statusCode = 415;
         res.send({message: "Only JSON allowed"});
         next();
+        return false;
     } else if(!(r.type && r.location && r.firstname && r.lastname && (r.email || r.phone))) {
         res.statusCode = 400;
         res.send({message: "JSON does not meet expected format"});
         next();
+        return false;
     } else {
+        return true;
+    }
+}
+
+// Add new report
+server.post('/api/reports', function(req, res, next) {
+    if(ensureValidReport(req, res, next)) {
         reports.push(req.body);
         res.statusCode = 200;
         res.send({id: reports.length})
@@ -67,15 +92,18 @@ server.post('/api/reports', function(req, res, next) {
 // Retrieve individual report
 server.get('/api/reports/:id', function(req, res, next) {
     var id = parseInt(req.params.id);
-    if(isNaN(id)) {
-        res.statusCode = 400;
-        res.send({message: "Parameter ID must be an integer"});
+    if(ensureValidId(req, res, next)) {
+        res.statusCode = 200;
+        res.send(reports[id-1]);
         next();
-    } else if(id <= 0 || id > reports.length) {
-        res.statusCode = 404;
-        res.send({message: "ID not found"});
-        next();
-    } else {
+    }
+});
+
+// Retrieve individual report
+server.put('/api/reports/:id', function(req, res, next) {
+    var id = parseInt(req.params.id);
+    if(ensureValidId(req, res, next) && ensureValidReport(req, res, next)) {
+        reports[id-1] = req.body;
         res.statusCode = 200;
         res.send(reports[id-1]);
         next();
