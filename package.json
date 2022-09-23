@@ -17,10 +17,9 @@
       "url": "https://github.com/Fix-MS/backend.git"
     },
     "scripts": {
-      "start": "node server.js"
+      "start": "node src/server.js"
     },
     "dependencies": {
       "restify": "^8.6.1"
     }
-  }
-  
+}
