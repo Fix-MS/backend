@@ -3,23 +3,24 @@
     "version": "0.1.0",
     "author": "Münsterhack 2022 Group 'Mängelmeldung'",
     "contributors": [
-      {
-        "name": "Christoph Friedrich"
-      }
+        {
+            "name": "Christoph Friedrich"
+        }
     ],
     "description": "Backend of Fix-MS accepting flaw reports and forwarding them to the city administration",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/Fix-MS/backend/issues"
+        "url": "https://github.com/Fix-MS/backend/issues"
     },
     "repository": {
-      "type": "git",
-      "url": "https://github.com/Fix-MS/backend.git"
+        "type": "git",
+        "url": "https://github.com/Fix-MS/backend.git"
     },
     "scripts": {
-      "start": "node src/server.js"
+        "start": "node src/server.js"
     },
     "dependencies": {
-      "restify": "^8.6.1"
+        "restify": "^11.0.0",
+        "uuid": "^9.0.0"
     }
 }
